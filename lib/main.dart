@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskmanger/screens/login.dart';
 import 'package:taskmanger/screens/register.dart';
 import 'package:taskmanger/screens/welcome.dart';
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //setting up the theme
       //theme: ThemeData.light(),
-      home: RegistrationScreen(),
+      home: LoginScreen(),
     );
   }
 }
