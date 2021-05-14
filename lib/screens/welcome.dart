@@ -1,6 +1,10 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:taskmanger/screens/login.dart';
+import 'package:taskmanger/screens/register.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  static String id = 'welcomePage';
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -18,17 +22,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                Container(
-                  child: Image.asset('images/image1.png'),
-                  height: 300.0,
-                ),
-                Text(
-                  'Tasks App',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
+                Hero(
+                  tag: 'welcomeImage',
+                  child: Container(
+                    child: Image.asset('images/image1.png'),
+                    height: 300.0,
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  //width: 250.0,
+                  child: TextLiquidFill(
+                    text: 'TASK MANAGER',
+                    waveColor: Colors.black,
+                    boxBackgroundColor: Colors.white,
+                    textStyle: TextStyle(
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    boxHeight: 100.0,
+                  ),
+                )
               ],
             ),
             SizedBox(
@@ -37,7 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () => {},
+                onPressed: () => Navigator.pushNamed(context, LoginScreen.id),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Text(
@@ -55,7 +71,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () => {},
+                onPressed: () =>
+                    Navigator.pushNamed(context, RegistrationScreen.id),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Text(
