@@ -1,16 +1,15 @@
 # taskmanger
 
-A new Flutter project.
+You will be able to add important task in this app.
 
-## Getting Started
+## Topics Covered
 
-This project is a starting point for a Flutter application.
+1. Adding Welcome Page 
+2. Creating icon for the App
+3. Adding image in the App
+4. Elevated Button, TextField
+5. Route, initial Route
+6. Navigation (push,pop)
+7. Hero Animation
+8. Importing Dart Package and using it's features
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
