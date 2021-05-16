@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       //setting up the theme
       //theme: ThemeData.light(),
       initialRoute: WelcomeScreen.id,
