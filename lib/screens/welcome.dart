@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:taskmanger/custom/roundedButton.dart';
 import 'package:taskmanger/screens/login.dart';
 import 'package:taskmanger/screens/register.dart';
 
@@ -50,42 +51,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(
               height: 48.0,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () => Navigator.pushNamed(context, LoginScreen.id),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Text(
-                    'Sign In',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue[200], // background
-                  onPrimary: Colors.black, // foreground
-                ),
-              ),
+            RoundedButton(
+              color: Colors.blue,
+              onPressedButton: () =>
+                  Navigator.pushNamed(context, LoginScreen.id),
+              text: 'Sign In',
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () =>
-                    Navigator.pushNamed(context, RegistrationScreen.id),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Text(
-                    'Sign Up',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.indigo, // background
-                  onPrimary: Colors.white, // foreground
-                ),
-              ),
+            RoundedButton(
+              color: Colors.indigo,
+              onPressedButton: () =>
+                  Navigator.pushNamed(context, RegistrationScreen.id),
+              text: 'Sign Up',
             ),
           ],
         ),
