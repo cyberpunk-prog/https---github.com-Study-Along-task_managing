@@ -20,11 +20,12 @@ class _LandingPageState extends State<LandingPage> {
     printUser();
   }
 
+  late User loggedInUser;
   void printUser() async {
     try {
       final user = _auth.currentUser;
       if (user != null) {
-        User loggedInUser = user;
+        loggedInUser = user;
         print(loggedInUser.email);
       }
     } catch (e) {
@@ -78,57 +79,57 @@ class _LandingPageState extends State<LandingPage> {
               messageUser = message.get('user');
               // final messageWidget = Text(
               //     'title: $messageTitle, body: $messageBody by-$messageUser ');
-              messageWidgets.add(
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  child: Container(
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Center(
-                            child: Text(
-                          messageTitle,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        )),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
-                              borderRadius: BorderRadius.circular(10),
+              if (loggedInUser.email == messageUser)
+                messageWidgets.add(
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Center(
+                              child: Text(
+                            messageTitle,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          )),
+                          Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              height: 200,
+                              child: ListView(children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Text(messageBody),
+                                )
+                              ]),
                             ),
-                            height: 200,
-                            child: ListView(children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: Text(messageBody),
-                              )
-                            ]),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 30,
-                            child: Text('- $messageUser'),
-                          ),
-                        )
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 30,
+                              child: Text('- $messageUser'),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
+                );
             }
           } else {
             return CircularProgressIndicator();
           }
           return ListView(
-            reverse: true,
             children: messageWidgets,
             padding: EdgeInsets.symmetric(vertical: 20),
           );
