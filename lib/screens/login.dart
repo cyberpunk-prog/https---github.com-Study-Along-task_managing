@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:taskmanger/custom/customTextField.dart';
 import 'package:taskmanger/custom/roundedButton.dart';
+import 'package:taskmanger/screens/landingPage.dart';
 
 class LoginScreen extends StatefulWidget {
   static String id = 'loginPage';
@@ -10,6 +12,31 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
+  var email;
+  var password;
+
+  void showSpinner() {
+    setState(() {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Center(child: CircularProgressIndicator());
+          });
+    });
+  }
+
+  Future signInUser() async {
+    try {
+      final user = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.pop(context);
+      Navigator.pushNamed(context, LandingPage.id);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,14 +58,16 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 48.0,
             ),
             TextFieldCustom(
-              onChanged: (value) => {},
+              obsecure: false,
+              onChanged: (value) => {email = value},
               hintText: 'Enter your Email',
             ),
             SizedBox(
               height: 8.0,
             ),
             TextFieldCustom(
-              onChanged: (value) => {},
+              obsecure: true,
+              onChanged: (value) => {password = value},
               hintText: 'Enter your password',
             ),
             SizedBox(
@@ -46,8 +75,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             RoundedButton(
               color: Colors.blue,
-              onPressedButton: () => {},
-              text: 'Sign In',
+              onPressedButton: () async {
+                showSpinner();
+                await signInUser();
+              },
+              text: 'Log In',
             ),
           ],
         ),
