@@ -34,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushNamed(context, LandingPage.id);
     } catch (e) {
       print(e.toString());
+      Navigator.pop(context);
     }
   }
 
@@ -47,11 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Hero(
-              tag: 'welcomeImage',
-              child: Container(
-                height: 200.0,
-                child: Image.asset('images/image2.png'),
+            Flexible(
+              child: Hero(
+                tag: 'welcomeImage',
+                child: Container(
+                  height: 200.0,
+                  child: Image.asset('images/image2.png'),
+                ),
               ),
             ),
             SizedBox(

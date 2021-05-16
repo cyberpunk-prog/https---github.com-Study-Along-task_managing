@@ -1,8 +1,8 @@
-// ignore: import_of_legacy_library_into_null_safe
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:taskmanger/screens/createTask.dart';
 
-//import 'package:flash_chat/constants.dart';
 class LandingPage extends StatefulWidget {
   static String id = 'landingPage';
 
@@ -12,10 +12,10 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   @override
   void initState() {
-    // TODO: implement initState
-
     super.initState();
     printUser();
   }
@@ -32,6 +32,14 @@ class _LandingPageState extends State<LandingPage> {
     }
   }
 
+  // void getMessages() async {
+  //   await for (var snapshot in _firestore.collection('users').snapshots()) {
+  //     for (var message in snapshot.docs) {
+  //       print(message.data());
+  //     }
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +54,85 @@ class _LandingPageState extends State<LandingPage> {
               },
               icon: Icon(Icons.close)),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CreateTask()),
+          );
+        },
+        child: Icon(Icons.edit),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _firestore.collection('users').snapshots(),
+        builder: (context, snapshot) {
+          var messageTitle, messageBody, messageUser;
+          List<Widget> messageWidgets = [];
+          if (snapshot.hasData) {
+            final messages = snapshot.data!.docs.reversed;
+
+            for (var message in messages) {
+              messageTitle = message.get('title');
+              messageBody = message.get('body');
+              messageUser = message.get('user');
+              // final messageWidget = Text(
+              //     'title: $messageTitle, body: $messageBody by-$messageUser ');
+              messageWidgets.add(
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                  child: Container(
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Center(
+                            child: Text(
+                          messageTitle,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        )),
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            height: 200,
+                            child: ListView(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Text(messageBody),
+                              )
+                            ]),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 30,
+                            child: Text('- $messageUser'),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
+          } else {
+            return CircularProgressIndicator();
+          }
+          return ListView(
+            reverse: true,
+            children: messageWidgets,
+            padding: EdgeInsets.symmetric(vertical: 20),
+          );
+        },
       ),
     );
   }

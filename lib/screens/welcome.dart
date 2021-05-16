@@ -18,38 +18,38 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                Hero(
-                  tag: 'welcomeImage',
-                  child: Container(
-                    child: Image.asset('images/image1.png'),
-                    height: 300.0,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  //width: 250.0,
-                  child: TextLiquidFill(
-                    text: 'TASK MANAGER',
-                    waveColor: Colors.black,
-                    boxBackgroundColor: Colors.white,
-                    textStyle: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Hero(
+                    tag: 'welcomeImage',
+                    child: Container(
+                      child: Image.asset('images/image1.png'),
+                      height: 300.0,
                     ),
-                    boxHeight: 100.0,
                   ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 48.0,
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    //width: 250.0,
+                    child: TextLiquidFill(
+                      text: 'TASK MANAGER',
+                      waveColor: Colors.black,
+                      boxBackgroundColor: Colors.white,
+                      textStyle: TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      boxHeight: 100.0,
+                    ),
+                  )
+                ],
+              ),
             ),
             RoundedButton(
               color: Colors.blue,
