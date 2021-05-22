@@ -121,10 +121,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 children: <Widget>[
                   Hero(
                     tag: 'welcomeImage',
-                    child: Container(
-                      height: 150.0,
-                      child: Image.asset('images/image1.png'),
-                    ),
+                    child: Image.asset('images/image4.png'),
                   ),
                   SizedBox(
                     height: 48.0,

@@ -15,7 +15,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.indigo[200],
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
         child: LayoutBuilder(
@@ -56,8 +56,8 @@ class NarrowLayout extends StatelessWidget {
                 //width: 250.0,
                 child: TextLiquidFill(
                   text: 'TASK MANAGER',
-                  waveColor: Colors.black,
-                  boxBackgroundColor: Colors.white,
+                  waveColor: Colors.white,
+                  boxBackgroundColor: Colors.indigo,
                   textStyle: TextStyle(
                     fontSize: 40.0,
                     fontWeight: FontWeight.bold,
