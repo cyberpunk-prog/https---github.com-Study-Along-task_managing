@@ -127,7 +127,7 @@ class _LandingPageState extends State<LandingPage> {
 
           return LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              if (constraints.maxWidth > 500 && constraints.maxWidth < 1000) {
+              if (constraints.maxWidth > 700 && constraints.maxWidth < 1200) {
                 return GridView.count(
                   children: messageWidgets,
                   padding: EdgeInsets.symmetric(vertical: 20),
