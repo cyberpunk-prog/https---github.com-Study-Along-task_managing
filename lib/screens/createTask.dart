@@ -13,7 +13,7 @@ class _CreateTaskState extends State<CreateTask> {
   final _firestore = FirebaseFirestore.instance;
   var title;
   String body = '';
-
+  int backgroundcolor = 0;
   void initState() {
     super.initState();
     printUser();
@@ -46,9 +46,12 @@ class _CreateTaskState extends State<CreateTask> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //messageText=(title+body) + user
-          _firestore
-              .collection('users')
-              .add({'user': loggedInUser.email, 'title': title, 'body': body});
+          _firestore.collection('users').add({
+            'user': loggedInUser.email,
+            'title': title,
+            'body': body,
+            'bg': backgroundcolor
+          });
           getMessages();
           Navigator.pop(context);
         },
@@ -125,6 +128,64 @@ class _CreateTaskState extends State<CreateTask> {
               ),
             ),
           ),
+          Center(child: Text('Select background color:')),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.lightBlueAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                    ))),
+                onPressed: () {
+                  backgroundcolor = 1;
+                },
+                child: Text('Blue'),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.redAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                    ))),
+                onPressed: () {
+                  backgroundcolor = 2;
+                },
+                child: Text('Red'),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.lightGreenAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                    ))),
+                onPressed: () {
+                  backgroundcolor = 3;
+                },
+                child: Text('Green'),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.orangeAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                    ))),
+                onPressed: () {
+                  backgroundcolor = 4;
+                },
+                child: Text('Orange'),
+              ),
+            ],
+          )
         ],
       ),
     );
