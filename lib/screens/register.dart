@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:taskmanger/custom/customTextField.dart';
 import 'package:taskmanger/custom/roundedButton.dart';
 import 'package:taskmanger/screens/landingPage.dart';
@@ -35,6 +36,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       Navigator.pushNamed(context, LandingPage.id);
     } catch (e) {
       print(e.toString());
+      Fluttertoast.showToast(
+          msg: "${e.toString()}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      Navigator.pop(context);
     }
   }
 
@@ -119,9 +129,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Hero(
-                    tag: 'welcomeImage',
-                    child: Image.asset('images/image4.png'),
+                  Expanded(
+                    child: Hero(
+                      tag: 'welcomeImage',
+                      child: Image.asset('images/image4.png'),
+                    ),
                   ),
                   SizedBox(
                     height: 48.0,

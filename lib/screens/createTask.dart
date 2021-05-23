@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CreateTask extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _CreateTaskState extends State<CreateTask> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   var title;
-  String body = '';
+  var body;
   int backgroundcolor = 0;
   void initState() {
     super.initState();
@@ -45,15 +46,27 @@ class _CreateTaskState extends State<CreateTask> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          if (title != null && body != null)
           //messageText=(title+body) + user
-          _firestore.collection('users').add({
-            'user': loggedInUser.email,
-            'title': title,
-            'body': body,
-            'bg': backgroundcolor
-          });
-          getMessages();
-          Navigator.pop(context);
+          {
+            _firestore.collection('users').add({
+              'user': loggedInUser.email,
+              'title': title,
+              'body': body,
+              'bg': backgroundcolor
+            });
+            getMessages();
+            Navigator.pop(context);
+          } else {
+            Fluttertoast.showToast(
+                msg: "Empty title or body",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          }
         },
         child: Icon(Icons.done),
         backgroundColor: Colors.green,
