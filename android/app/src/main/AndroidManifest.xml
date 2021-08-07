@@ -3,6 +3,8 @@
    <application
         android:label="taskmanger"
         android:icon="@mipmap/ic_launcher">
+
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

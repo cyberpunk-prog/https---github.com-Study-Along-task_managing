@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "140701092243",
+    "project_id": "taskmanger-fa130",
+    "storage_bucket": "taskmanger-fa130.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140701092243:android:d2cbc047befcf5e04e0066",
+        "android_client_info": {
+          "package_name": "com.example.taskmanger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "140701092243-023o9esc6ac6dv2j3d18bg5iu63lm2iv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuOg-lpBFE5AwJyXuu-2gjC0LVHasKWcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140701092243-023o9esc6ac6dv2j3d18bg5iu63lm2iv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
