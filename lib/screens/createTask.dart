@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CreateTask extends StatefulWidget {
   @override
@@ -12,8 +13,8 @@ class _CreateTaskState extends State<CreateTask> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   var title;
-  String body = '';
-
+  var body;
+  int backgroundcolor = 0;
   void initState() {
     super.initState();
     printUser();
@@ -45,12 +46,27 @@ class _CreateTaskState extends State<CreateTask> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          if (title != null && body != null)
           //messageText=(title+body) + user
-          _firestore
-              .collection('users')
-              .add({'user': loggedInUser.email, 'title': title, 'body': body});
-          getMessages();
-          Navigator.pop(context);
+          {
+            _firestore.collection('users').add({
+              'user': loggedInUser.email,
+              'title': title,
+              'body': body,
+              'bg': backgroundcolor
+            });
+            getMessages();
+            Navigator.pop(context);
+          } else {
+            Fluttertoast.showToast(
+                msg: "Empty title or body",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
+          }
         },
         child: Icon(Icons.done),
         backgroundColor: Colors.green,
@@ -125,6 +141,64 @@ class _CreateTaskState extends State<CreateTask> {
               ),
             ),
           ),
+          Center(child: Text('Select background color:')),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.lightBlueAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                    ))),
+                onPressed: () {
+                  backgroundcolor = 1;
+                },
+                child: Text('Blue'),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.redAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                    ))),
+                onPressed: () {
+                  backgroundcolor = 2;
+                },
+                child: Text('Red'),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.lightGreenAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                    ))),
+                onPressed: () {
+                  backgroundcolor = 3;
+                },
+                child: Text('Green'),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.orangeAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(180.0),
+                    ))),
+                onPressed: () {
+                  backgroundcolor = 4;
+                },
+                child: Text('Orange'),
+              ),
+            ],
+          )
         ],
       ),
     );
